@@ -1,3 +1,24 @@
+<script>
+    (function() {
+        var userAgent = navigator.userAgent || navigator.vendor || window.opera;
+        var isInstagram = userAgent.indexOf('Instagram') > -1;
+
+        if (isInstagram) {
+            var url = window.location.href.replace(/^https?:\/\//, "");
+
+            if (userAgent.match(/Android/i)) {
+                // 안드로이드: Intent 스키마를 이용해 크롬 브라우저 강제 실행
+                location.href = "intent://" + url + "#Intent;scheme=https;package=com.android.chrome;end";
+            } else if (userAgent.match(/iPhone|iPad|iPod/i)) {
+                // iOS: 직접 호출이 어려우므로 사용자에게 점 3개 메뉴 클릭 안내 레이어 노출 추천
+                // 혹은 특정 mime-type을 활용한 편법(최근 iOS 버전에서 차단 가능성 높음)
+                console.log("iOS Instagram in-app browser detected.");
+                alert("더 나은 이용을 위해 'System 브라우저로 열기'를 눌러주세요.");
+            }
+        }
+    })();
+</script>
+
 <!DOCTYPE html>
 <html lang="ko">
 <head>
