@@ -2,7 +2,7 @@
     (function() {
         var userAgent = navigator.userAgent || navigator.vendor || window.opera;
 
-        alert(userAgent);
+//        alert(userAgent);
         var isInstagram = userAgent.indexOf('Instagram') > -1;
 
         if (isInstagram) {
@@ -11,6 +11,7 @@
             if (userAgent.match(/Android/i)) {
                 // 안드로이드: Intent 스키마를 이용해 크롬 브라우저 강제 실행
                 location.href = "intent://" + url + "#Intent;scheme=https;package=com.android.chrome;end";
+                window.close();
             } else if (userAgent.match(/iPhone|iPad|iPod/i)) {
                 // iOS: 직접 호출이 어려우므로 사용자에게 점 3개 메뉴 클릭 안내 레이어 노출 추천
                 // 혹은 특정 mime-type을 활용한 편법(최근 iOS 버전에서 차단 가능성 높음)
