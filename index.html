@@ -1,6 +1,8 @@
 <script>
     (function() {
         var userAgent = navigator.userAgent || navigator.vendor || window.opera;
+
+        alert(userAgent);
         var isInstagram = userAgent.indexOf('Instagram') > -1;
 
         if (isInstagram) {
