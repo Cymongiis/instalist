@@ -11,7 +11,17 @@
             if (userAgent.match(/Android/i)) {
                 // 안드로이드: Intent 스키마를 이용해 크롬 브라우저 강제 실행
                 location.href = "intent://" + url + "#Intent;scheme=https;package=com.android.chrome;end";
-                window.close();
+                // 2. 0.5초(500ms) 후에 창 닫기 시도
+    setTimeout(function() {
+        try {
+            window.close(); // 일반적인 시도
+            self.opener = window; 
+            self.close();   // 일부 환경 우회 시도
+        } catch (e) {
+            console.log("자동 닫기 실패: 보안 정책 때문일 수 있습니다.");
+        }
+    }, 1000);
+                
             } else if (userAgent.match(/iPhone|iPad|iPod/i)) {
                 // iOS: 직접 호출이 어려우므로 사용자에게 점 3개 메뉴 클릭 안내 레이어 노출 추천
                 // 혹은 특정 mime-type을 활용한 편법(최근 iOS 버전에서 차단 가능성 높음)
